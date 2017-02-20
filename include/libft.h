@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 16:40:17 by gpinchon          #+#    #+#             */
-/*   Updated: 2015/12/23 14:24:02 by gpinchon         ###   ########.fr       */
+/*   Updated: 2017/02/20 11:19:18 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ int				ft_strequ(char const *s1, char const *s2);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoinfree(char *s1, char *s2);
 char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
+char			**ft_strsplitwspace(char const *s);
 char			*ft_strrev(char *str);
 char			*ft_itoa(int n);
 void			ft_charswap(char *a, char *b);
@@ -71,6 +73,7 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char const *s, int fd);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
+void			ft_free_chartab(char **s);
 int				get_next_line(int const fd, char **line);
 float			clamp(float nbr, float max, float min);
 long int		clamp_int(long int nbr, long int max, long int min);
@@ -80,5 +83,6 @@ int				cycle_int(int nbr, int min, int max);
 unsigned int	count_char(const char *str, char c);
 size_t			wordcount(const char *str, char c);
 char			*file_to_str(int fd);
+char			*null(char *s);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/06 12:32:09 by gpinchon          #+#    #+#             */
-/*   Updated: 2015/12/30 18:29:46 by gpinchon         ###   ########.fr       */
+/*   Updated: 2017/02/20 15:00:11 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char	*ft_strjoinfree(char **a, char **b)
+static char	*ft_gnlstrjoinfree(char **a, char **b)
 {
 	char	*joined;
 
@@ -32,8 +32,11 @@ int		get_single_line(const int fd, char **save)
 		buffer = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
 		ft_memset(buffer, 0, BUFF_SIZE + 1);
 		if ((value = read(fd, buffer, BUFF_SIZE)) <= 0)
+		{
+			free(buffer);
 			return (value);
-		*save = ft_strjoinfree(save, &buffer);
+		}
+		*save = ft_gnlstrjoinfree(save, &buffer);
 	}
 	return (1);
 }

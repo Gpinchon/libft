@@ -6,7 +6,7 @@
 #    By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/27 16:34:53 by gpinchon          #+#    #+#              #
-#    Updated: 2017/02/19 01:34:44 by gpinchon         ###   ########.fr        #
+#    Updated: 2017/02/20 14:57:42 by gpinchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC		=	./src/ft_bzero.c \
 			./src/ft_strnequ.c \
 			./src/ft_strsub.c \
 			./src/ft_strjoin.c \
+			./src/ft_strjoinfree.c \
 			./src/ft_strtrim.c \
 			./src/ft_putchar.c \
 			./src/ft_putstr.c \
@@ -62,11 +63,13 @@ SRC		=	./src/ft_bzero.c \
 			./src/ft_putnbr_fd.c \
 			./src/ft_itoa.c \
 			./src/ft_strsplit.c \
+			./src/ft_strsplitwspace.c \
 			./src/ft_memmove.c \
 			./src/ft_strlcat.c \
 			./src/ft_strrev.c \
 			./src/ft_charswap.c \
 			./src/ft_intswap.c \
+			./src/ft_free_chartab.c	\
 			./src/get_next_line.c \
 			./src/clamp.c	\
 			./src/cycle.c	\
@@ -76,7 +79,7 @@ SRC		=	./src/ft_bzero.c \
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I ./include/
 CC		= gcc
-CFLAGS	= -Ofast -Wall -Wextra -Werror $(INCLUDE)
+CFLAGS	= -g -Wall -Wextra -Werror $(INCLUDE)
 
 
 $(NAME): $(OBJ)
