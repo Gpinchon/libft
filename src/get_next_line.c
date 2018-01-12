@@ -6,13 +6,13 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/06 12:32:09 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/01/12 20:50:16 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/01/12 21:14:27 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-static char	*ft_gnlstrjoinfree(size_t total_size, char *s1, char *s2)
+static char	*ft_gnlstrjoinfree(size_t s1_size, size_t s2_size, char *s1, char *s2)
 {
 	char			*str;
 
@@ -21,10 +21,10 @@ static char	*ft_gnlstrjoinfree(size_t total_size, char *s1, char *s2)
 	else if (s1 && s2)
 	{
 		
-		if (!(str = ft_memalloc(total_size + 1)))
+		if (!(str = ft_memalloc(s1_size + s2_size + 1)))
 			return (NULL);
-		ft_strcpy(str, s1);
-		ft_strcat(str, s2);
+		ft_strncpy(str, s1, s1_size);
+		ft_strncat(str, s2, s2_size);
 		free(s1);
 	}
 	return (str);
@@ -66,8 +66,8 @@ static void	read_file(t_gnl *gnl)
 	while (!ft_strchr(gnl->buffer, '\n') && (r = read(gnl->fd, b, BUFF_SIZE)))
 	{
 		b[r] = 0;
+		gnl->buffer = ft_gnlstrjoinfree(gnl->buffer_size, r, gnl->buffer, b);
 		gnl->buffer_size += r;
-		gnl->buffer = ft_gnlstrjoinfree(gnl->buffer_size, gnl->buffer, b);
 		if (ft_strchr(b, '\n'))
 			break ;
 	}
