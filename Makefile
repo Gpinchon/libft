@@ -6,7 +6,7 @@
 #    By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/27 16:34:53 by gpinchon          #+#    #+#              #
-#    Updated: 2017/02/20 15:15:43 by gpinchon         ###   ########.fr        #
+#    Updated: 2018/01/12 16:20:03 by gpinchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC		=	./src/ft_bzero.c \
 			./src/ft_strchr.c \
 			./src/ft_strcpy.c \
 			./src/ft_strdup.c \
+			./src/ft_strndup.c \
 			./src/ft_strlen.c \
 			./src/ft_strncat.c \
 			./src/ft_strncpy.c \
@@ -52,6 +53,7 @@ SRC		=	./src/ft_bzero.c \
 			./src/ft_strsub.c \
 			./src/ft_strjoin.c \
 			./src/ft_strjoinfree.c \
+			./src/ft_strjoinfreebool.c \
 			./src/ft_strtrim.c \
 			./src/ft_putchar.c \
 			./src/ft_putstr.c \
@@ -79,7 +81,7 @@ SRC		=	./src/ft_bzero.c \
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I ./include/
 CC		= gcc
-CFLAGS	= -Ofast -Wall -Wextra -Werror $(INCLUDE)
+CFLAGS	= -pg -Wall -Wextra -Werror $(INCLUDE)
 
 
 $(NAME): $(OBJ)

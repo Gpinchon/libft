@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 16:40:17 by gpinchon          #+#    #+#             */
-/*   Updated: 2017/02/20 11:19:18 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/01/12 16:24:06 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void			ft_putstr(char *str);
 void			ft_putchar(char c);
 char			*ft_strcpy(char *dest, const char *src);
 char			*ft_strdup(const char *s);
+char			*ft_strndup(const char *s, size_t n);
 size_t			ft_strlen(const char *str);
 char			*ft_strncpy(char *dest, const char *src, size_t n);
 char			*ft_strcat(char *dest, const char *src);
@@ -60,6 +61,7 @@ int				ft_strnequ(char const *s1, char const *s2, size_t n);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strjoinfree(char *s1, char *s2);
+char			*ft_strjoinfreebool(char *s1, char *s2, char free1, char free2);
 char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
 char			**ft_strsplitwspace(char const *s);
