@@ -6,7 +6,7 @@
 #    By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/27 16:34:53 by gpinchon          #+#    #+#              #
-#    Updated: 2018/01/12 16:20:03 by gpinchon         ###   ########.fr        #
+#    Updated: 2018/01/12 20:49:27 by gpinchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ SRC		=	./src/ft_bzero.c \
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I ./include/
 CC		= gcc
-CFLAGS	= -pg -Wall -Wextra -Werror $(INCLUDE)
+CFLAGS	= -Ofast -Wall -Wextra -Werror $(INCLUDE)
 
 
 $(NAME): $(OBJ)

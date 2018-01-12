@@ -6,80 +6,31 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/06 12:32:09 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/01/12 16:44:42 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/01/12 20:50:16 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-static char	*ft_gnlstrjoinfree(char **a, char **b)
+static char	*ft_gnlstrjoinfree(size_t total_size, char *s1, char *s2)
 {
-	char	*joined;
+	char			*str;
 
-	joined = ft_strjoin(*a, *b);
-	ft_strdel(a);
-	ft_strdel(b);
-	return (joined);
+	if (!s1 && s2)
+		str = null((char*)s2);
+	else if (s1 && s2)
+	{
+		
+		if (!(str = ft_memalloc(total_size + 1)))
+			return (NULL);
+		ft_strcpy(str, s1);
+		ft_strcat(str, s2);
+		free(s1);
+	}
+	return (str);
 }
 
-int		get_single_line(const int fd, char **save)
-{
-	int		value;
-	char	*buffer;
-
-	while (!ft_strchr(*save, '\n'))
-	{
-		buffer = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
-		ft_memset(buffer, 0, BUFF_SIZE + 1);
-		if ((value = read(fd, buffer, BUFF_SIZE)) <= 0)
-		{
-			free(buffer);
-			return (value);
-		}
-		*save = ft_gnlstrjoinfree(save, &buffer);
-	}
-	return (1);
-}
-
-
-
-int		get_next_line(const int fd, char **line)
-{
-	static char	*save = NULL;
-	size_t		tmp_len, tmp_backlen;
-	int			value;
-	char		*tmp;
-
-	if (fd <= 0 || !line)
-		return (-1);
-	tmp = save && *save ? ft_strdup(save) : NULL;
-	if ((value = get_single_line(fd, &tmp)) == -1)
-		return (-1);
-	if (!ft_strchr(tmp, '\n') || !value)
-	{
-		*line = tmp && *tmp ? tmp : NULL;
-		ft_strdel(&save);
-	}
-	else
-	{
-		tmp_len = ft_strlen(tmp);
-		tmp_backlen = ft_strlen(ft_strchr(tmp, '\n'));
-		*line = ft_strndup(tmp, tmp_len - tmp_backlen);
-		ft_strdel(&save);
-		save = ft_strdup(ft_strchr(tmp, '\n') + 1);
-		ft_strdel(&tmp);
-	}
-	return (value);
-}
-
-/*typedef struct	s_gnl
-{
-	int		fd;
-	char	*save;
-	struct s_gnl	*next;
-}				t_gnl;
-
-t_gnl	*find_gnl(t_gnl *gnl, const int fd)
+static t_gnl	*find_gnl(t_gnl *gnl, const int fd)
 {
 	t_gnl	*cur_gnl;
 
@@ -93,9 +44,8 @@ t_gnl	*find_gnl(t_gnl *gnl, const int fd)
 	return (NULL);
 }
 
-t_gnl	*add_gnl(t_gnl **gnl, const int fd)
+static t_gnl	*add_gnl(t_gnl **gnl, const int fd)
 {
-	ft_putstr("add_gnl\n");
 	t_gnl	*new_gnl, **cur_gnl;
 
 	if (!(new_gnl = ft_memalloc(sizeof(t_gnl))))
@@ -108,32 +58,39 @@ t_gnl	*add_gnl(t_gnl **gnl, const int fd)
 	return (new_gnl);
 }
 
+static void	read_file(t_gnl *gnl)
+{
+	int		r;
+	char	b[BUFF_SIZE + 1];
+
+	while (!ft_strchr(gnl->buffer, '\n') && (r = read(gnl->fd, b, BUFF_SIZE)))
+	{
+		b[r] = 0;
+		gnl->buffer_size += r;
+		gnl->buffer = ft_gnlstrjoinfree(gnl->buffer_size, gnl->buffer, b);
+		if (ft_strchr(b, '\n'))
+			break ;
+	}
+}
+
 int		get_next_line(const int fd, char **line)
 {
 	static t_gnl	*gnl = NULL;
-	t_gnl			*cur_gnl;
-	char			buf[BUFF_SIZE + 1];
-	int				ret;
+	t_gnl			*cgnl;
+	char			*back_pos;
+	char			*buffer_ptr;
 
-	if (fd <= 0 || !line)
+	if (fd <= 0 || !line ||(!(cgnl = find_gnl(gnl, fd))
+	&& !(cgnl = add_gnl(&gnl, fd))))
 		return (-1);
-	if (!(cur_gnl = find_gnl(gnl, fd)))
-		if (!(cur_gnl = add_gnl(&gnl, fd)))
-			return (-1);
-	char *save_buf = cur_gnl->save;
-	while ((ret = read(fd, buf, BUFF_SIZE)))
-	{
-		buf[ret] = 0;
-		save_buf = ft_strjoinfreebool(save_buf, buf, 1, 0);
-		if (ft_strchr(buf, '\n'))
-			break ;
-	}
-	char *back_pos;
-	back_pos = ft_strchr(save_buf, '\n');
+	read_file(cgnl);
+	back_pos = ft_strchr(cgnl->buffer, '\n');
 	if (!back_pos)
 		return (0);
-	*line = ft_strndup(save_buf, back_pos - save_buf);
-	cur_gnl->save = ft_strdup(back_pos + 1);
-	free(save_buf);
+	*line = ft_strndup(cgnl->buffer, back_pos - cgnl->buffer);
+	buffer_ptr = cgnl->buffer;
+	cgnl->buffer_size -= (back_pos + 1 - cgnl->buffer);
+	cgnl->buffer = ft_strndup(back_pos + 1, cgnl->buffer_size);
+	free(buffer_ptr);
 	return (1);
-}*/
+}

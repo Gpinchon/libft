@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 16:40:17 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/01/12 16:24:06 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/01/12 20:49:02 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,15 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# define BUFF_SIZE 1024
+# define BUFF_SIZE 4096
+
+typedef struct	s_gnl
+{
+	int		fd;
+	char	*buffer;
+	size_t	buffer_size;
+	struct s_gnl	*next;
+}				t_gnl;
 
 void			*ft_bzero(void *str, size_t n);
 void			*ft_memccpy(void *str1, const void *str2, int c, size_t n);
