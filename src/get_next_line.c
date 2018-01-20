@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/06 12:32:09 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/01/12 21:35:15 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/01/20 00:51:49 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,15 @@ int				get_next_line(const int fd, char **line)
 		return (-1);
 	read_file(cgnl);
 	back_pos = ft_strchr(cgnl->buffer, '\n');
-	if (!back_pos)
+	if (!back_pos && !cgnl->buffer_size)
 		return (0);
+	else if (!back_pos && cgnl->buffer_size)
+	{
+		*line = ft_strndup(cgnl->buffer, cgnl->buffer_size);
+		free(cgnl->buffer);
+		ft_bzero(cgnl, sizeof(t_gnl));
+		return (1);
+	}
 	*line = ft_strndup(cgnl->buffer, back_pos - cgnl->buffer);
 	buffer_ptr = cgnl->buffer;
 	cgnl->buffer_size -= (back_pos + 1 - cgnl->buffer);

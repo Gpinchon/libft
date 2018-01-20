@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 23:15:28 by gpinchon          #+#    #+#             */
-/*   Updated: 2017/02/19 23:22:28 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/01/20 00:36:40 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ char	*split_cpyws(const char *str)
 	while (*str && is_wspace(*str))
 		str++;
 	size = wordlenws(str);
-	strsplit = ft_strnew(size);
+	strsplit = ft_strnew(size + 1);
 	ft_strncpy(strsplit, str, size);
-	strsplit[size] = '\0';
 	return (strsplit);
 }
 
@@ -68,7 +67,7 @@ char	**ft_strsplitwspace(char const *s)
 	if (s)
 	{
 		i = wordcountws(s);
-		split = malloc(sizeof(char**) * (i + 1));
+		split = ft_memalloc(sizeof(char**) * (i + 1));
 		i = 0;
 		while (*s)
 		{
@@ -81,7 +80,6 @@ char	**ft_strsplitwspace(char const *s)
 			}
 			s++;
 		}
-		split[i] = NULL;
 		return (split);
 	}
 	return (NULL);
