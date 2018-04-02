@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 21:32:16 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/01/12 21:41:13 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/04/02 13:04:39 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	*ft_strnjoin(size_t s1_size, size_t s2_size, char *s1, char *s2)
 		str = ft_strncpy(ft_memalloc(s1_size + 1), (const char*)s1, s1_size);
 	else if (s1 && s2)
 	{
-		
 		if (!(str = ft_memalloc(s1_size + s2_size + 1)))
 			return (NULL);
 		ft_strncpy(str, s1, s1_size);

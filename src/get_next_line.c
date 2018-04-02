@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/06 12:32:09 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/01/20 00:51:49 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/04/02 13:05:49 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static t_gnl	*find_gnl(t_gnl *gnl, const int fd)
 
 static t_gnl	*add_gnl(t_gnl **gnl, const int fd)
 {
-	t_gnl	*new_gnl, **cur_gnl;
+	t_gnl	*new_gnl;
+	t_gnl	**cur_gnl;
 
 	if (!(new_gnl = ft_memalloc(sizeof(t_gnl))))
 		return (NULL);
@@ -65,7 +66,7 @@ int				get_next_line(const int fd, char **line)
 	char			*back_pos;
 	char			*buffer_ptr;
 
-	if (fd <= 0 || !line ||(!(cgnl = find_gnl(gnl, fd))
+	if (fd <= 0 || !line || (!(cgnl = find_gnl(gnl, fd))
 	&& !(cgnl = add_gnl(&gnl, fd))))
 		return (-1);
 	read_file(cgnl);

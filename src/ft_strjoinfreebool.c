@@ -6,13 +6,14 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 22:30:59 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/01/12 18:39:45 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/04/02 13:03:30 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char				*ft_strjoinfreebool(char *s1, char *s2, char free1, char free2)
+char				*ft_strjoinfreebool(char *s1, char *s2,
+					char free1, char free2)
 {
 	char			*str;
 
