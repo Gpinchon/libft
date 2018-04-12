@@ -6,7 +6,7 @@
 /*   By: gpinchon <gpinchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 16:40:17 by gpinchon          #+#    #+#             */
-/*   Updated: 2018/04/02 13:03:06 by gpinchon         ###   ########.fr       */
+/*   Updated: 2018/04/12 21:29:10 by gpinchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <stdio.h>
 # define BUFF_SIZE	4096
 # define GNL		struct s_gnl
 
@@ -96,6 +97,7 @@ int				cycle_int(int nbr, int min, int max);
 unsigned int	count_char(const char *str, char c);
 size_t			wordcount(const char *str, char c);
 char			*file_to_str(int fd);
+char			*stream_to_str(FILE *stream);
 char			*null(char *s);
 
 #endif
